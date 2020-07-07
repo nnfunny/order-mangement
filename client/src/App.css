@@ -1,0 +1,28 @@
+.App {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+/* Home  */
+.home-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Search Bar */
+.search-container {
+  margin: 40px 10px;
+  font-size: 1.5rem;
+}
+.search-container .search-icon {
+  margin-right: 13px;
+}
+.search-container label {
+  margin-right: 20px;
+  padding: 0 !important;
+}

@@ -1,0 +1,23 @@
+{
+  "name": "oder-mangement",
+  "version": "1.0.0",
+  "description": "The backend application for order management",
+  "main": "app.js",
+  "author": "Nam Nguyen",
+  "scripts": {
+    "start": "node dist/app.js",
+    "dev": "nodemon src/app.ts",
+    "build": "tsc -p ."
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/express": "^4.17.7",
+    "@types/node": "^14.0.18",
+    "nodemon": "^2.0.4",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
