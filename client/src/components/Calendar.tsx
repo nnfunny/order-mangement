@@ -23,7 +23,10 @@ const Calendar = () => {
     setFocusedInput(focusedInput);
   }
   return (
-    <>
+    <div className="calendar">
+      <div>
+        <b>Created date</b>
+      </div>
       <DateRangePicker
         startDate={startDate}
         startDateId="startDate"
@@ -35,7 +38,7 @@ const Calendar = () => {
         onFocusChange={handleFocusedChange}
         small={true}
       />
-    </>
+    </div>
   );
 };
 

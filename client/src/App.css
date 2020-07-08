@@ -26,3 +26,16 @@
   margin-right: 20px;
   padding: 0 !important;
 }
+
+/* Calendar */
+.calendar {
+  margin: 20px 10px;
+}
+
+/* Total */
+.total {
+  margin: 10px 10px;
+}
+.total span {
+  font-weight: bold;
+}
