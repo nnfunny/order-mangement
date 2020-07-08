@@ -20,9 +20,9 @@ const Table: React.FC<Props> = ({ orders }) => {
           </tr>
         </thead>
         <tbody>
-          {orders.map((order) => {
+          {orders.map((order, index) => {
             return (
-              <tr key={order.id}>
+              <tr key={index}>
                 <td>
                   <div style={{ fontWeight: "bold" }}>{order.orderId}</div>
                   <div>{order.orderName}</div>

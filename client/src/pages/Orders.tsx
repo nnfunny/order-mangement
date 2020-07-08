@@ -1,33 +1,40 @@
-import React from "react";
+import React, { useReducer } from "react";
 import SearchBar from "../components/SearchBar";
 import Calendar from "../components/Calendar";
 import Total from "../components/Total";
-import data from "./table.json";
 import Table from "../components/Table";
-import { Order } from "../interface/order";
 import Pagination from "../components/Pagination";
+import reducers from "../reducers";
+import GlobalTye from "../interface/global";
+import table from "./data";
 
-const table: Order[] = data.map((order) => {
-  return {
-    id: order.id,
-    orderId: order.orderId,
-    orderName: order.orderName,
-    customerCompany: order.customerCompany,
-    customerName: order.customerName,
-    orderDate: order.orderDate,
-    deliverdAmount: order.deliveredAmount,
-    totalAmount: order.totalAmount,
-  };
-});
-
+const initialState: GlobalTye = {
+  startDate: "",
+  endDate: "",
+  keyword: "",
+  totalPrice: 0,
+  totalOrders: 0,
+  limit: 5,
+  currentPage: 1,
+  goTo: 1,
+  orders: [],
+};
 const Orders = () => {
+  const [globalState, dispatch] = useReducer(reducers, initialState);
+  console.log(globalState.keyword);
   return (
     <div className="container orders">
-      <SearchBar />
+      <SearchBar dispatch={dispatch} />
       <Calendar />
       <Total amount={0.0} />
       <Table orders={table} />
-      <Pagination totalOrder={table.length} limit={5} pageNumber={1} goTo={1} />
+      <Pagination
+        totalOrder={table.length}
+        limit={5}
+        pageNumber={globalState.currentPage}
+        goTo={globalState.goTo}
+        dispatch={dispatch}
+      />
     </div>
   );
 };
