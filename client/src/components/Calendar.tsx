@@ -4,17 +4,23 @@ import { DateRangePicker, FocusedInputShape } from "react-dates";
 import React, { useState } from "react";
 import moment from "moment";
 
+type FocusedInput = FocusedInputShape | null;
+type MomentType = moment.Moment | null;
+interface Period {
+  endDate: moment.Moment | null;
+  startDate: moment.Moment | null;
+}
 const Calendar = () => {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [focusedInput, setFocusedInput] = useState(null);
-  function handleDateChange(period: any) {
+  const [startDate, setStartDate] = useState<MomentType>(null);
+  const [endDate, setEndDate] = useState<MomentType>(null);
+  const [focusedInput, setFocusedInput] = useState<FocusedInput>(null);
+  function handleDateChange(period: Period) {
     setStartDate(period.startDate);
     setEndDate(period.endDate);
   }
 
-  function handleFocusedChange(focusedInput: any) {
-    setFocusedInput(focusedInput || "startDate");
+  function handleFocusedChange(focusedInput: FocusedInput) {
+    setFocusedInput(focusedInput);
   }
   return (
     <>
