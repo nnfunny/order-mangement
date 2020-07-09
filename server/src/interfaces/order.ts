@@ -3,7 +3,7 @@ export interface Order {
   orderName: string;
   customerCompany: string;
   customerName: string;
-  orderDate: string;
+  orderDate: Date;
   deliveredAmount: number;
   totalAmount: number;
 }

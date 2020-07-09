@@ -34,8 +34,8 @@ app.get("/api/orders", (req: Request, res: Response) => {
 // GET: /api/orders/filter?page=<page>&limit=<limit>&method=<ascending> -> Sort orders
 // by date (ascending OR descending)
 app.get("/api/orders/filter", (req: Request, res: Response) => {
-  const page: number = Number(req.query.page);
-  const limit: number = Number(req.query.limit);
+  const page: number = Number(req.query.page) ? Number(req.query.page) : 1;
+  const limit: number = Number(req.query.limit) ? Number(req.query.lime) : 5;
   const method = req.query.method;
 
   OrderModel.find()
@@ -50,12 +50,11 @@ app.get("/api/orders/filter", (req: Request, res: Response) => {
 
 // GET: /api/orders/search -> Search by keyword
 app.get("/api/orders/search", (req: Request, res: Response) => {
-  const page: number = Number(req.query.page);
-  const limit: number = Number(req.query.limit);
-  const method = req.query.method;
-  const keyword: any = req.query.keyword;
+  const page: number = Number(req.query.page) ? Number(req.query.page) : 1;
+  const limit: number = Number(req.query.limit) ? Number(req.query.lime) : 5;
+  const method: string = req.query.method as string;
+  const keyword: string = req.query.keyword as string;
   const rgx = new RegExp(`.*${keyword}.*`, "gi");
-  console.log(rgx);
   OrderModel.find({
     $or: [
       {
@@ -73,12 +72,30 @@ app.get("/api/orders/search", (req: Request, res: Response) => {
           $regex: rgx,
         },
       },
-      {
-        orderDate: {
-          $regex: rgx,
-        },
-      },
     ],
+  })
+    .sort({
+      orderDate: method === "ascending" ? 1 : -1,
+    })
+    .skip((page - 1) * limit)
+    .limit(limit)
+    .then((orders: Order[]) => res.send(orders))
+    .catch((err) => console.log(err));
+});
+
+// GET: /api/orders/date?from=<from>&to=<to>
+app.get("/api/orders/date", (req: Request, res: Response) => {
+  const page: number = Number(req.query.page) ? Number(req.query.page) : 1;
+  const limit: number = Number(req.query.limit) ? Number(req.query.lime) : 5;
+  const method = req.query.method;
+  const from: string = req.query.from as string;
+  const to: string = req.query.to as string;
+  console.log(limit, page);
+  OrderModel.find({
+    orderDate: {
+      $gt: new Date(from),
+      $lt: new Date(to),
+    },
   })
     .sort({
       orderDate: method === "ascending" ? 1 : -1,

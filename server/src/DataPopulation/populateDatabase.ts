@@ -17,7 +17,7 @@ async function poplulateDatabase() {
       orderName: order.order_name,
       customerCompany: "",
       customerName: order.customer_id,
-      orderDate: order.created_at,
+      orderDate: new Date(order.created_at),
       deliveredAmount: 0,
       totalAmount: 0,
     });
