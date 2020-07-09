@@ -7,7 +7,6 @@ import { Order } from "../interfaces/order";
 import mongoose from "mongoose";
 import { URI } from "../credential";
 import OrderModel from "../models/order";
-import moment from "moment";
 
 async function poplulateDatabase() {
   let data: Order[] = [];
@@ -18,7 +17,7 @@ async function poplulateDatabase() {
       orderName: order.order_name,
       customerCompany: "",
       customerName: order.customer_id,
-      orderDate: moment(order.created_at).format("MMM Do, LT"),
+      orderDate: order.created_at,
       deliveredAmount: 0,
       totalAmount: 0,
     });
