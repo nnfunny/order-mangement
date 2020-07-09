@@ -9,7 +9,7 @@ const OrderSchema: Schema = new Schema({
   customerCompany: { type: String, required: true },
   customerName: { type: String, required: true },
   orderDate: { type: String, required: true },
-  delieveredAmount: { type: Number },
+  deliveredAmount: { type: Number, required: true },
   totalAmount: { type: Number, required: true },
 });
 

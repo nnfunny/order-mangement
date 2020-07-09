@@ -112,10 +112,11 @@ async function poplulateDatabase() {
   for await (const order of data) {
     order.totalAmount = totalAmountMap.get(order.orderId)!;
   }
-
+  // console.log(data);
   return data;
 }
 
+// poplulateDatabase();
 // Connect MongoDB
 const dbURI = URI;
 
