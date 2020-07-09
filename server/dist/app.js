@@ -11,13 +11,17 @@ const order_1 = __importDefault(require("./models/order"));
 const app = express_1.default();
 const PORT = process.env.PORT || 5000;
 // Connect MongoDB
-const dbURI = credential_1.URI;
+const dbURI = process.env.URI || credential_1.URI;
 mongoose_1.default
     .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => app.listen(PORT))
     .catch((err) => console.log(err));
 // Middleware
 app.use(express_1.default.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+});
 /*
   API Routes
 */
@@ -30,8 +34,8 @@ app.get("/api/orders", (req, res) => {
 // GET: /api/orders/filter?page=<page>&limit=<limit>&method=<ascending> -> Sort orders
 // by date (ascending OR descending)
 app.get("/api/orders/filter", (req, res) => {
-    const page = Number(req.query.page) ? Number(req.query.page) : 1;
-    const limit = Number(req.query.limit) ? Number(req.query.lime) : 5;
+    const page = Number(req.query.page);
+    const limit = Number(req.query.limit);
     const method = req.query.method;
     order_1.default.find()
         .sort({
@@ -44,8 +48,8 @@ app.get("/api/orders/filter", (req, res) => {
 });
 // GET: /api/orders/search -> Search by keyword
 app.get("/api/orders/search", (req, res) => {
-    const page = Number(req.query.page) ? Number(req.query.page) : 1;
-    const limit = Number(req.query.limit) ? Number(req.query.lime) : 5;
+    const page = Number(req.query.page);
+    const limit = Number(req.query.limit);
     const method = req.query.method;
     const keyword = req.query.keyword;
     const rgx = new RegExp(`.*${keyword}.*`, "gi");
@@ -78,8 +82,8 @@ app.get("/api/orders/search", (req, res) => {
 });
 // GET: /api/orders/date?from=<from>&to=<to>
 app.get("/api/orders/date", (req, res) => {
-    const page = Number(req.query.page) ? Number(req.query.page) : 1;
-    const limit = Number(req.query.limit) ? Number(req.query.lime) : 5;
+    const page = Number(req.query.page);
+    const limit = Number(req.query.limit);
     const method = req.query.method;
     const from = req.query.from;
     const to = req.query.to;

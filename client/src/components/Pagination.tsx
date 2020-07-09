@@ -5,7 +5,6 @@ import { LIMIT_ACTION, GO_TO_ACTION } from "../constants";
 
 interface Props {
   totalOrder: number;
-  limit: number;
   pageNumber: number;
   goTo: number;
   dispatch: Dispatch<Actions>;
@@ -13,7 +12,6 @@ interface Props {
 
 const Pagination: React.FC<Props> = ({
   totalOrder,
-  limit,
   pageNumber,
   goTo,
   dispatch,

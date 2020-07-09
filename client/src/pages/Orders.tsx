@@ -6,9 +6,9 @@ import Table from "../components/Table";
 import Pagination from "../components/Pagination";
 import reducers from "../reducers";
 import GlobalTye from "../interface/global";
-import table from "./data";
 
 const initialState: GlobalTye = {
+  loading: true,
   startDate: "",
   endDate: "",
   keyword: "",
@@ -21,16 +21,14 @@ const initialState: GlobalTye = {
 };
 const Orders = () => {
   const [globalState, dispatch] = useReducer(reducers, initialState);
-  console.log(globalState.keyword);
   return (
     <div className="container orders">
       <SearchBar dispatch={dispatch} />
       <Calendar />
       <Total amount={0.0} />
-      <Table orders={table} />
+      <Table state={globalState} dispatch={dispatch} />
       <Pagination
-        totalOrder={table.length}
-        limit={5}
+        totalOrder={globalState.orders.length}
         pageNumber={globalState.currentPage}
         goTo={globalState.goTo}
         dispatch={dispatch}

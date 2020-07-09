@@ -1,6 +1,7 @@
 import { Order } from "./order";
 
 export default interface GlobalTye {
+  loading: boolean;
   startDate: string;
   endDate: string;
   keyword: string;

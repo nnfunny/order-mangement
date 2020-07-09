@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import Orders from "./pages/Orders";
 
+const URL = "https://order-managment.herokuapp.com";
 function App() {
   return (
     <div className="App">
@@ -15,4 +16,5 @@ function App() {
   );
 }
 
+export { URL };
 export default App;

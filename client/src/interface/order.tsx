@@ -5,6 +5,6 @@ export interface Order {
   customerCompany: string;
   customerName: string;
   orderDate: string;
-  deliverdAmount: number;
+  deliveredAmount: number;
   totalAmount: number;
 }

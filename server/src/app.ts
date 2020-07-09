@@ -3,15 +3,13 @@ import moogose from "mongoose";
 import { URI } from "./credential";
 import OrderModel from "./models/order";
 import { Order } from "./interfaces/order";
-import { ResolveOptions } from "dns";
-import order from "./models/order";
 
 // Express App
 const app: Application = express();
 const PORT: number | string = process.env.PORT || 5000;
 
 // Connect MongoDB
-const dbURI: string = URI;
+const dbURI: string = process.env.URI || URI;
 moogose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => app.listen(PORT))
@@ -19,6 +17,10 @@ moogose
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 
 /* 
   API Routes
@@ -34,8 +36,8 @@ app.get("/api/orders", (req: Request, res: Response) => {
 // GET: /api/orders/filter?page=<page>&limit=<limit>&method=<ascending> -> Sort orders
 // by date (ascending OR descending)
 app.get("/api/orders/filter", (req: Request, res: Response) => {
-  const page: number = Number(req.query.page) ? Number(req.query.page) : 1;
-  const limit: number = Number(req.query.limit) ? Number(req.query.lime) : 5;
+  const page: number = Number(req.query.page);
+  const limit: number = Number(req.query.limit);
   const method = req.query.method;
 
   OrderModel.find()
@@ -50,8 +52,8 @@ app.get("/api/orders/filter", (req: Request, res: Response) => {
 
 // GET: /api/orders/search -> Search by keyword
 app.get("/api/orders/search", (req: Request, res: Response) => {
-  const page: number = Number(req.query.page) ? Number(req.query.page) : 1;
-  const limit: number = Number(req.query.limit) ? Number(req.query.lime) : 5;
+  const page: number = Number(req.query.page);
+  const limit: number = Number(req.query.limit);
   const method: string = req.query.method as string;
   const keyword: string = req.query.keyword as string;
   const rgx = new RegExp(`.*${keyword}.*`, "gi");
@@ -85,8 +87,8 @@ app.get("/api/orders/search", (req: Request, res: Response) => {
 
 // GET: /api/orders/date?from=<from>&to=<to>
 app.get("/api/orders/date", (req: Request, res: Response) => {
-  const page: number = Number(req.query.page) ? Number(req.query.page) : 1;
-  const limit: number = Number(req.query.limit) ? Number(req.query.lime) : 5;
+  const page: number = Number(req.query.page);
+  const limit: number = Number(req.query.limit);
   const method = req.query.method;
   const from: string = req.query.from as string;
   const to: string = req.query.to as string;

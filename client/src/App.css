@@ -115,3 +115,23 @@ input[type="number"]::-webkit-outer-spin-button {
   font-size: 0.85rem;
   transform: translateY(-4px);
 }
+/* Loader */
+.loader {
+  margin: auto;
+  margin-bottom: 100px;
+  border: 5px solid #e2e2e2; /* Light grey */
+  border-top: 5px solid #82a0d8; /* Blue */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
