@@ -5,6 +5,9 @@ import {
   GO_TO_ACTION,
   KEYWORD_SEARCH_ACTION,
   LIST_ORDER_SUCCUESS,
+  SEARCH_REQUEST_ACTION,
+  DATE_REQUEST_ACTION,
+  DATE_SUCCESS_ACTION,
 } from "../constants";
 
 function reducers(state: GlobalTye, action: Actions) {
@@ -12,9 +15,26 @@ function reducers(state: GlobalTye, action: Actions) {
     case LIMIT_ACTION:
       return { ...state, limit: action.payload };
     case GO_TO_ACTION:
-      return { ...state, goTo: action.payload };
+      return { ...state, goTo: action.payload, currentPage: action.payload };
+    case SEARCH_REQUEST_ACTION:
+      return { ...state, ...action.payload };
     case KEYWORD_SEARCH_ACTION:
-      return { ...state, keyword: action.payload };
+      return {
+        ...state,
+        orders: action.payload.orders,
+        loading: action.payload.loading,
+      };
+    case DATE_REQUEST_ACTION:
+      return {
+        ...state,
+        ...action.payload,
+      };
+
+    case DATE_SUCCESS_ACTION:
+      return {
+        ...state,
+        ...action.payload,
+      };
     case LIST_ORDER_SUCCUESS:
       return {
         ...state,

@@ -3,8 +3,12 @@ import {
   GO_TO_ACTION,
   KEYWORD_SEARCH_ACTION,
   LIST_ORDER_SUCCUESS,
+  SEARCH_REQUEST_ACTION,
+  DATE_REQUEST_ACTION,
+  DATE_SUCCESS_ACTION,
 } from "../constants";
 import { Order } from "./order";
+import { BlockquoteHTMLAttributes } from "react";
 
 // LIMIT_ACTION
 interface LimitAction {
@@ -21,10 +25,33 @@ interface GoToAction {
 // KEYWORD_SEARCH_ACTION
 interface KeywordSearchAction {
   type: typeof KEYWORD_SEARCH_ACTION;
-  payload: string;
+  payload: PayloadListOrderAction;
+}
+interface PayloadKeywordRequest {
+  keyword: string;
+  loading: boolean;
+}
+interface SearchRequestAction {
+  type: typeof SEARCH_REQUEST_ACTION;
+  payload: PayloadKeywordRequest;
 }
 
-// LIST_ORDER_SUCCUESS,
+// DATE_REQUEST_ACTION
+interface PayloadDateRequest {
+  startDate: string;
+  endDate: string;
+  loading: boolean;
+}
+interface DateRequestAction {
+  type: typeof DATE_REQUEST_ACTION;
+  payload: PayloadDateRequest;
+}
+interface DateSucessAction {
+  type: typeof DATE_SUCCESS_ACTION;
+  payload: PayloadListOrderAction;
+}
+
+// LIST_ORDER_SUCCUESS
 export interface PayloadListOrderAction {
   orders: Order[];
   loading: boolean;
@@ -38,4 +65,7 @@ export type Actions =
   | LimitAction
   | GoToAction
   | KeywordSearchAction
-  | ListOrderAction;
+  | ListOrderAction
+  | SearchRequestAction
+  | DateRequestAction
+  | DateSucessAction;

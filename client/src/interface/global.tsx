@@ -7,8 +7,8 @@ export default interface GlobalTye {
   keyword: string;
   totalPrice: number;
   totalOrders: number;
-  limit: number;
   currentPage: number;
+  limit: number;
   goTo: number;
   orders: Order[];
 }

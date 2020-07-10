@@ -1,43 +1,52 @@
-import "react-dates/initialize";
-import "react-dates/lib/css/_datepicker.css";
-import { DateRangePicker, FocusedInputShape } from "react-dates";
-import React, { useState } from "react";
-import moment from "moment";
+import React, { useState, Dispatch } from "react";
+import { CalendarRequest } from "../actions/CalendarOrders";
+import { Actions } from "../interface/actions";
+import { DATE_REQUEST_ACTION } from "../constants";
 
-type FocusedInput = FocusedInputShape | null;
-type MomentType = moment.Moment | null;
-interface Period {
-  endDate: moment.Moment | null;
-  startDate: moment.Moment | null;
+interface Props {
+  dispatch: Dispatch<Actions>;
 }
-const Calendar = () => {
-  const [startDate, setStartDate] = useState<MomentType>(null);
-  const [endDate, setEndDate] = useState<MomentType>(null);
-  const [focusedInput, setFocusedInput] = useState<FocusedInput>(null);
-  function handleDateChange(period: Period) {
-    setStartDate(period.startDate);
-    setEndDate(period.endDate);
+const Calendar: React.FC<Props> = ({ dispatch }) => {
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  function handleStartDate(e: React.ChangeEvent<HTMLInputElement>) {
+    setStartDate(e.target.value);
   }
-
-  function handleFocusedChange(focusedInput: FocusedInput) {
-    setFocusedInput(focusedInput);
+  function handleEndDate(e: React.ChangeEvent<HTMLInputElement>) {
+    setEndDate(e.target.value);
+  }
+  function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (startDate !== "" && endDate !== "") {
+      const action = CalendarRequest(startDate, endDate);
+      dispatch({ type: DATE_REQUEST_ACTION, payload: action.payload });
+    }
   }
   return (
     <div className="calendar">
       <div>
         <b>Created date</b>
+        <div className="calendar-container">
+          <form action="" onSubmit={handleSubmit}>
+            <input
+              value={startDate}
+              type="date"
+              name="startDate"
+              id="startDate"
+              onChange={handleStartDate}
+              onChangeCapture={handleStartDate}
+            />
+            <input
+              value={endDate}
+              type="date"
+              name="endDate"
+              id="endDate"
+              onChange={handleEndDate}
+            />
+            <button className="submit-button">Submit Date</button>
+          </form>
+        </div>
       </div>
-      <DateRangePicker
-        startDate={startDate}
-        startDateId="startDate"
-        endDate={endDate}
-        endDateId="endDate"
-        showDefaultInputIcon={true}
-        onDatesChange={handleDateChange}
-        focusedInput={focusedInput}
-        onFocusChange={handleFocusedChange}
-        small={true}
-      />
     </div>
   );
 };

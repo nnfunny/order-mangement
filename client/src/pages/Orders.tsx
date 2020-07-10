@@ -21,18 +21,17 @@ const initialState: GlobalTye = {
 };
 const Orders = () => {
   const [globalState, dispatch] = useReducer(reducers, initialState);
+  console.log(globalState.startDate, globalState.endDate);
   return (
     <div className="container orders">
       <SearchBar dispatch={dispatch} />
-      <Calendar />
-      <Total amount={0.0} />
+      <Calendar dispatch={dispatch} />
+      <Total state={globalState} />
+      <a href="/orders" className="refresh-button">
+        REFRESH
+      </a>
       <Table state={globalState} dispatch={dispatch} />
-      <Pagination
-        totalOrder={globalState.orders.length}
-        pageNumber={globalState.currentPage}
-        goTo={globalState.goTo}
-        dispatch={dispatch}
-      />
+      <Pagination state={globalState} dispatch={dispatch} />
     </div>
   );
 };
