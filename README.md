@@ -48,7 +48,7 @@ Before running the project in the development enviroment, you should install [No
       
       > npm run dev
       
-      _Note_: To build the server from Typescript version to Javascript, run: __yarn build__ or __npm run build__ (Before running these command, make sure that there is Typescript running globally. If not, check out this (link)[https://www.typescriptlang.org/index.html#download-links] to install it.
+      _Note_: To build the server from Typescript version to Javascript, run: __yarn build__ or __npm run build__ (Before running these command, make sure that there is Typescript running globally. If not, check out this [link](https://www.typescriptlang.org/index.html#download-links) to install it.
 
    2. **_Front end_**
    
