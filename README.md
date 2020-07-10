@@ -16,7 +16,7 @@ __Intrductions to set up the project__
 
 Before running the project in the development enviroment, you should install [Node.js and NPM](https://nodejs.org/en/)
 
-   **1. _Back end_**
+   1. **_Back end_**
       
       1.1 Navigate to __server__ directory
       
@@ -50,9 +50,9 @@ Before running the project in the development enviroment, you should install [No
       
       _Note_: To build the server from Typescript version to Javascript, run: __yarn build__ or __npm run build__ (Before running these command, make sure that there is Typescript running globally. If not, check out this (link)[https://www.typescriptlang.org/index.html#download-links] to install it.
 
-   **2. _Front end_**
+   2. **_Front end_**
    
-      2.1 Navigate to __client__ directory
+       2.1 Navigate to __client__ directory
       
       2.2 Run following comand to install all needed packages:
                 
