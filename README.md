@@ -1,6 +1,6 @@
 # Order Management 🖌📗📦
 
-__Project Description__: A website represents an online stationery shop to satisfy “back-to-school” feelings and sell beautiful notebooks, fresh pens, delightful erasers, pencil cases, etc.
+__Project Description__: A website manages clients' orders.
 
 __Live Demo__:
  - [Back-end on Heroku](https://order-managment.herokuapp.com/api/orders)
